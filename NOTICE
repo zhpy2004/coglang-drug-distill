@@ -1,0 +1,28 @@
+coglang-drug-distill
+Copyright 2026 zhpy2004
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this work except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+------------------------------------------------------------------------
+This project builds on, and depends on, CogLang:
+
+    CogLang — https://github.com/jaysinailabs/coglang
+    Copyright Jason Xin / Bigcoders
+    Licensed under the Apache License, Version 2.0
+
+CogLang is NOT vendored into this repository; it is installed as a
+dependency (see requirements.txt). All CogLang source, grammars
+(examples/grammar/coglang.gbnf) and the `generation-eval` verifier
+remain the property of their original authors under their own license.
+------------------------------------------------------------------------
+
+MEDICAL DISCLAIMER
+This is a learning / research demonstration of language-model
+distillation and on-device deployment. It is NOT a medical device and
+NOT clinical decision support. The medication-safety knowledge graph is
+a small, illustrative seed dataset and is not authoritative. Do not use
+any output for real medical decisions.

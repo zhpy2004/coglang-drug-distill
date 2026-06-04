@@ -1,0 +1,6 @@
+flask>=3.0
+pyyaml>=6.0
+requests>=2.31
+networkx>=3.0
+coglang
+pytest>=8.0

@@ -1,0 +1,10 @@
+{
+  "schema": {"categories": ["Animal"], "relation_types": ["eats"]},
+  "nodes": [
+    {"id": "cat", "category": "Animal", "name": "Cat", "confidence": 1.0},
+    {"id": "mouse", "category": "Animal", "name": "Mouse", "confidence": 1.0}
+  ],
+  "edges": [
+    {"from": "cat", "to": "mouse", "relation_type": "eats", "confidence": 1.0}
+  ]
+}

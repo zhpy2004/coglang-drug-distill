@@ -1,0 +1,41 @@
+# --- large artifacts & third-party (not tracked; model published on Hugging Face) ---
+/gguf/
+/merged/
+/adapters/
+/envs/
+/hf-cache/
+/pip-cache/
+/llama.cpp/
+/coglang/
+
+# --- pipeline noise: logs, versioned backups, intermediate & eval outputs ---
+pipeline/*.log
+pipeline/*.v*.json
+pipeline/*.v*.jsonl
+pipeline/requests*.jsonl
+pipeline/responses_*.jsonl
+pipeline/responses*.jsonl
+pipeline/error_pool*.jsonl
+pipeline/sft_positive*.jsonl
+pipeline/*seed*fixture*.json
+pipeline/*expanded_fixture*.json
+pipeline/scored.json
+pipeline/candidate_*.json
+pipeline/drug_candidate_*.json
+
+# --- local workflow notes ---
+H[A]NDOFF.md
+docs/super[p]owers/
+
+# --- local credentials / env ---
+.env
+.env.*
+*.key
+s[e]crets.*
+
+# --- python ---
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.venv/

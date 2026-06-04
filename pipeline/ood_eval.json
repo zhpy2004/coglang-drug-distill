@@ -1,0 +1,1419 @@
+{
+  "schema_version": "coglang-generation-eval-fixture/v0.1",
+  "name": "drug-safety-ood-eval-v2",
+  "description": "Expanded (v2) hand-authored out-of-distribution eval for the drug-domain CogLang specialist. 156 cases across all 11 operators, preserving the 52 eval-v1 cases and adding 104 cases to improve per-operator statistical coverage. The added cases include dirty-but-answerable user phrasings (typos, casual shorthand, lowercase/no punctuation) and broad novel-entity coverage while keeping every prompt solvable by one reference expression. Reference-based scoring is unchanged; structural-impossible patterns (reverse traversal, multi-relation union, comparison) remain excluded.",
+  "defined_levels": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+  ],
+  "cases": [
+    {
+      "case_id": "OOD-001",
+      "level": "L2",
+      "prompt": "Which adverse effects is ibuprofen known to cause?",
+      "reference_expr": "Traverse[\"ibuprofen\", \"causes\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-002",
+      "level": "L2",
+      "prompt": "List the populations for which naproxen is contraindicated.",
+      "reference_expr": "Traverse[\"naproxen\", \"contraindicated_for\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-003",
+      "level": "L2",
+      "prompt": "Fetch the confidence value stored on the fluoxetine node.",
+      "reference_expr": "Get[\"fluoxetine\", \"confidence\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-004",
+      "level": "L2",
+      "prompt": "Give me at most three nodes in the AdverseEffect category.",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"category\"], \"AdverseEffect\"], {\"k\": 3, \"mode\": \"default\"}]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-005",
+      "level": "L2",
+      "prompt": "For each drug in the list of warfarin, fluoxetine and sertraline, return its interaction partners.",
+      "reference_expr": "ForEach[List[\"warfarin\", \"fluoxetine\", \"sertraline\"], d_, Traverse[d_, \"interacts_with\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-006",
+      "level": "L3",
+      "prompt": "Register diabetes as a new Condition entity named Diabetes.",
+      "reference_expr": "Create[\"Entity\", {\"id\": \"diabetes\", \"category\": \"Condition\", \"name\": \"Diabetes\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-007",
+      "level": "L3",
+      "prompt": "Add an edge marking sertraline as contraindicated_for pregnancy.",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"sertraline\", \"to\": \"pregnancy\", \"relation_type\": \"contraindicated_for\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-008",
+      "level": "L3",
+      "prompt": "Bump the fluoxetine node's confidence value up to 0.9.",
+      "reference_expr": "Update[\"fluoxetine\", {\"confidence\": 0.9}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-009",
+      "level": "L3",
+      "prompt": "Audit a rename of aspirin to Aspirin.",
+      "reference_expr": "Trace[Update[\"aspirin\", {\"name\": \"Aspirin\"}]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-010",
+      "level": "L3",
+      "prompt": "Raise fluoxetine's confidence to 0.9, then add a treats edge from fluoxetine to anxiety.",
+      "reference_expr": "Do[Update[\"fluoxetine\", {\"confidence\": 0.9}], Create[\"Edge\", {\"from\": \"fluoxetine\", \"to\": \"anxiety\", \"relation_type\": \"treats\"}]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-011",
+      "level": "L2",
+      "prompt": "metformin interactions",
+      "reference_expr": "Traverse[\"metformin\", \"interacts_with\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-012",
+      "level": "L2",
+      "prompt": "What are the ingredients of atorvastatin?",
+      "reference_expr": "Traverse[\"atorvastatin\", \"contains\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-013",
+      "level": "L2",
+      "prompt": "Which class does simvastatin belong to?",
+      "reference_expr": "Traverse[\"simvastatin\", \"belongs_to\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-014",
+      "level": "L2",
+      "prompt": "List the conditions treated by omeprazole.",
+      "reference_expr": "Traverse[\"omeprazole\", \"treats\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-015",
+      "level": "L2",
+      "prompt": "what does aspirin cause",
+      "reference_expr": "Traverse[\"aspirin\", \"causes\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-016",
+      "level": "L2",
+      "prompt": "Show the populations for which codeine is contraindicated.",
+      "reference_expr": "Traverse[\"codeine\", \"contraindicated_for\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-017",
+      "level": "L2",
+      "prompt": "sertraline interactions",
+      "reference_expr": "Traverse[\"sertraline\", \"interacts_with\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-018",
+      "level": "L2",
+      "prompt": "What is amoxicillin contraindicated for?",
+      "reference_expr": "Traverse[\"amoxicillin\", \"contraindicated_for\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-019",
+      "level": "L2",
+      "prompt": "What is the name of lisinopril?",
+      "reference_expr": "Get[\"lisinopril\", \"name\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-020",
+      "level": "L2",
+      "prompt": "Read the category of warfarin.",
+      "reference_expr": "Get[\"warfarin\", \"category\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-021",
+      "level": "L2",
+      "prompt": "confidence of metformin",
+      "reference_expr": "Get[\"metformin\", \"confidence\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-022",
+      "level": "L2",
+      "prompt": "Get the name attribute of node gi_bleed.",
+      "reference_expr": "Get[\"gi_bleed\", \"name\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-023",
+      "level": "L2",
+      "prompt": "List all nodes whose category is Drug.",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"category\"], \"Drug\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-024",
+      "level": "L2",
+      "prompt": "Find nodes with category DrugClass.",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"category\"], \"DrugClass\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-025",
+      "level": "L2",
+      "prompt": "Which node has the name Hypertension?",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"name\"], \"Hypertension\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-026",
+      "level": "L2",
+      "prompt": "Return up to 5 nodes whose confidence is 1.0.",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"confidence\"], 1.0], {\"k\": 5, \"mode\": \"default\"}]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-027",
+      "level": "L2",
+      "prompt": "Find nodes whose category is Population.",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"category\"], \"Population\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-028",
+      "level": "L2",
+      "prompt": "For each of atorvastatin and simvastatin, return its name.",
+      "reference_expr": "ForEach[List[\"atorvastatin\", \"simvastatin\"], d_, Get[d_, \"name\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-029",
+      "level": "L2",
+      "prompt": "For each drug in aspirin, ibuprofen, naproxen, list its adverse effects.",
+      "reference_expr": "ForEach[List[\"aspirin\", \"ibuprofen\", \"naproxen\"], d_, Traverse[d_, \"causes\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-030",
+      "level": "L2",
+      "prompt": "For each of metformin and omeprazole, return its category.",
+      "reference_expr": "ForEach[List[\"metformin\", \"omeprazole\"], d_, Get[d_, \"category\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-031",
+      "level": "L2",
+      "prompt": "For each drug in warfarin, fluoxetine, return what it treats.",
+      "reference_expr": "ForEach[List[\"warfarin\", \"fluoxetine\"], d_, Traverse[d_, \"treats\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-032",
+      "level": "L3",
+      "prompt": "Create an Entity for clopidogrel as a Drug named Clopidogrel.",
+      "reference_expr": "Create[\"Entity\", {\"id\": \"clopidogrel\", \"category\": \"Drug\", \"name\": \"Clopidogrel\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-033",
+      "level": "L3",
+      "prompt": "Add a new DrugClass statin with name Statin.",
+      "reference_expr": "Create[\"Entity\", {\"id\": \"statin\", \"category\": \"DrugClass\", \"name\": \"Statin\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-034",
+      "level": "L3",
+      "prompt": "Create a Population entity elderly named Elderly.",
+      "reference_expr": "Create[\"Entity\", {\"id\": \"elderly\", \"category\": \"Population\", \"name\": \"Elderly\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-035",
+      "level": "L3",
+      "prompt": "Record an interacts_with edge from clopidogrel to aspirin.",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"clopidogrel\", \"to\": \"aspirin\", \"relation_type\": \"interacts_with\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-036",
+      "level": "L3",
+      "prompt": "Add a causes edge from atorvastatin to muscle_pain.",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"atorvastatin\", \"to\": \"muscle_pain\", \"relation_type\": \"causes\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-037",
+      "level": "L3",
+      "prompt": "Create a treats edge from omeprazole to gerd.",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"omeprazole\", \"to\": \"gerd\", \"relation_type\": \"treats\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-038",
+      "level": "L3",
+      "prompt": "Set warfarin's name to Warfarin Sodium.",
+      "reference_expr": "Update[\"warfarin\", {\"name\": \"Warfarin Sodium\"}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-039",
+      "level": "L3",
+      "prompt": "Update metformin's category to Drug.",
+      "reference_expr": "Update[\"metformin\", {\"category\": \"Drug\"}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-040",
+      "level": "L3",
+      "prompt": "Change the confidence of sertraline to 0.85.",
+      "reference_expr": "Update[\"sertraline\", {\"confidence\": 0.85}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-041",
+      "level": "L3",
+      "prompt": "Delete the node test_drug.",
+      "reference_expr": "Delete[\"test_drug\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-042",
+      "level": "L3",
+      "prompt": "Soft-delete obsolete_entity.",
+      "reference_expr": "Delete[\"obsolete_entity\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-043",
+      "level": "L3",
+      "prompt": "Remove the node temp_condition.",
+      "reference_expr": "Delete[\"temp_condition\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-044",
+      "level": "L3",
+      "prompt": "Audit the creation of a Condition asthma named Asthma.",
+      "reference_expr": "Trace[Create[\"Entity\", {\"id\": \"asthma\", \"category\": \"Condition\", \"name\": \"Asthma\"}]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-045",
+      "level": "L3",
+      "prompt": "Log the deletion of old_drug.",
+      "reference_expr": "Trace[Delete[\"old_drug\"]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-046",
+      "level": "L3",
+      "prompt": "Trace an update setting codeine's confidence to 0.7.",
+      "reference_expr": "Trace[Update[\"codeine\", {\"confidence\": 0.7}]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-047",
+      "level": "L3",
+      "prompt": "Create a Drug lisinopril named Lisinopril and then create a belongs_to edge from lisinopril to ace_inhibitor.",
+      "reference_expr": "Do[Create[\"Entity\", {\"id\": \"lisinopril\", \"category\": \"Drug\", \"name\": \"Lisinopril\"}], Create[\"Edge\", {\"from\": \"lisinopril\", \"to\": \"ace_inhibitor\", \"relation_type\": \"belongs_to\"}]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-048",
+      "level": "L3",
+      "prompt": "Update amoxicillin's confidence to 0.9 and then delete temp_node.",
+      "reference_expr": "Do[Update[\"amoxicillin\", {\"confidence\": 0.9}], Delete[\"temp_node\"]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-049",
+      "level": "L3",
+      "prompt": "Update naproxen's name to Naproxen and then create a causes edge from naproxen to gi_bleed.",
+      "reference_expr": "Do[Update[\"naproxen\", {\"name\": \"Naproxen\"}], Create[\"Edge\", {\"from\": \"naproxen\", \"to\": \"gi_bleed\", \"relation_type\": \"causes\"}]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-050",
+      "level": "L2",
+      "prompt": "List what metformin interacts with, or an empty list if none.",
+      "reference_expr": "If[Equal[Traverse[\"metformin\", \"interacts_with\"], List[]], List[], Traverse[\"metformin\", \"interacts_with\"]]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-051",
+      "level": "L2",
+      "prompt": "Show codeine's adverse effects, or an empty list if there are none.",
+      "reference_expr": "If[Equal[Traverse[\"codeine\", \"causes\"], List[]], List[], Traverse[\"codeine\", \"causes\"]]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-052",
+      "level": "L2",
+      "prompt": "Return aspirin's interaction partners if found, otherwise none.",
+      "reference_expr": "IfFound[Traverse[\"aspirin\", \"interacts_with\"], hits_, hits_, \"none\"]",
+      "expected_top_level_heads": [
+        "IfFound"
+      ]
+    },
+    {
+      "case_id": "OOD-053",
+      "level": "L2",
+      "prompt": "what does atorvastatin interact with",
+      "reference_expr": "Traverse[\"atorvastatin\", \"interacts_with\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-054",
+      "level": "L2",
+      "prompt": "List what metformin treats.",
+      "reference_expr": "Traverse[\"metformin\", \"treats\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-055",
+      "level": "L2",
+      "prompt": "warfrin interactions pls",
+      "reference_expr": "Traverse[\"warfarin\", \"interacts_with\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-056",
+      "level": "L2",
+      "prompt": "Which ingredients does omeprazole contain?",
+      "reference_expr": "Traverse[\"omeprazole\", \"contains\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-057",
+      "level": "L2",
+      "prompt": "show clopidogrel adverse effects",
+      "reference_expr": "Traverse[\"clopidogrel\", \"causes\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-058",
+      "level": "L2",
+      "prompt": "What class does gabapentin belong to?",
+      "reference_expr": "Traverse[\"gabapentin\", \"belongs_to\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-059",
+      "level": "L2",
+      "prompt": "List what clopidogrel is contraindicated for.",
+      "reference_expr": "Traverse[\"clopidogrel\", \"contraindicated_for\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-060",
+      "level": "L2",
+      "prompt": "acetaminophen treats what",
+      "reference_expr": "Traverse[\"acetaminophen\", \"treats\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-061",
+      "level": "L2",
+      "prompt": "Which adverse effects does sertraline cause?",
+      "reference_expr": "Traverse[\"sertraline\", \"causes\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-062",
+      "level": "L2",
+      "prompt": "naproxen belongs_to class",
+      "reference_expr": "Traverse[\"naproxen\", \"belongs_to\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-063",
+      "level": "L2",
+      "prompt": "List interactions recorded for lisinopril.",
+      "reference_expr": "Traverse[\"lisinopril\", \"interacts_with\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-064",
+      "level": "L2",
+      "prompt": "what does amoxicillin treat",
+      "reference_expr": "Traverse[\"amoxicillin\", \"treats\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-065",
+      "level": "L2",
+      "prompt": "Return populations contraindicated for ibuprofen.",
+      "reference_expr": "Traverse[\"ibuprofen\", \"contraindicated_for\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-066",
+      "level": "L2",
+      "prompt": "simvastatin ingredients please",
+      "reference_expr": "Traverse[\"simvastatin\", \"contains\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-067",
+      "level": "L2",
+      "prompt": "Which condition does losartan treat?",
+      "reference_expr": "Traverse[\"losartan\", \"treats\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-068",
+      "level": "L2",
+      "prompt": "fluoxetine belongs to what class",
+      "reference_expr": "Traverse[\"fluoxetine\", \"belongs_to\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-069",
+      "level": "L2",
+      "prompt": "List effects caused by tramadol.",
+      "reference_expr": "Traverse[\"tramadol\", \"causes\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-070",
+      "level": "L2",
+      "prompt": "codeine interactns",
+      "reference_expr": "Traverse[\"codeine\", \"interacts_with\"]",
+      "expected_top_level_heads": [
+        "Traverse"
+      ]
+    },
+    {
+      "case_id": "OOD-071",
+      "level": "L2",
+      "prompt": "find nodes whose name is Naproxen",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"name\"], \"Naproxen\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-072",
+      "level": "L2",
+      "prompt": "which nodes are Condition category",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"category\"], \"Condition\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-073",
+      "level": "L2",
+      "prompt": "Return Drug nodes with default ordering capped at 4.",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"category\"], \"Drug\"], {\"k\": 4, \"mode\": \"default\"}]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-074",
+      "level": "L2",
+      "prompt": "find node named Lisinopril",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"name\"], \"Lisinopril\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-075",
+      "level": "L2",
+      "prompt": "show entries with category AdverseEffect",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"category\"], \"AdverseEffect\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-076",
+      "level": "L2",
+      "prompt": "Which node is called Muscle Pain?",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"name\"], \"Muscle Pain\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-077",
+      "level": "L2",
+      "prompt": "give me up to 2 Population nodes",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"category\"], \"Population\"], {\"k\": 2, \"mode\": \"default\"}]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-078",
+      "level": "L2",
+      "prompt": "Find nodes whose confidence is 0.8.",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"confidence\"], 0.8]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-079",
+      "level": "L2",
+      "prompt": "nodes named gerd pls",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"name\"], \"GERD\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-080",
+      "level": "L2",
+      "prompt": "Return entities in DrugClass category.",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"category\"], \"DrugClass\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-081",
+      "level": "L2",
+      "prompt": "what rows have name Serotonin Syndrome",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"name\"], \"Serotonin Syndrome\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-082",
+      "level": "L2",
+      "prompt": "Find nodes named Breastfeeding.",
+      "reference_expr": "Query[n_, Equal[Get[n_, \"name\"], \"Breastfeeding\"]]",
+      "expected_top_level_heads": [
+        "Query"
+      ]
+    },
+    {
+      "case_id": "OOD-083",
+      "level": "L3",
+      "prompt": "Create a Drug entity atorvastatin named Atorvastatin.",
+      "reference_expr": "Create[\"Entity\", {\"id\": \"atorvastatin\", \"category\": \"Drug\", \"name\": \"Atorvastatin\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-084",
+      "level": "L3",
+      "prompt": "Register migraine as a Condition named Migraine.",
+      "reference_expr": "Create[\"Entity\", {\"id\": \"migraine\", \"category\": \"Condition\", \"name\": \"Migraine\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-085",
+      "level": "L3",
+      "prompt": "Create an AdverseEffect nausea named Nausea.",
+      "reference_expr": "Create[\"Entity\", {\"id\": \"nausea\", \"category\": \"AdverseEffect\", \"name\": \"Nausea\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-086",
+      "level": "L3",
+      "prompt": "Create a Population breastfeeding named Breastfeeding.",
+      "reference_expr": "Create[\"Entity\", {\"id\": \"breastfeeding\", \"category\": \"Population\", \"name\": \"Breastfeeding\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-087",
+      "level": "L3",
+      "prompt": "make drug losartan name Losartan",
+      "reference_expr": "Create[\"Entity\", {\"id\": \"losartan\", \"category\": \"Drug\", \"name\": \"Losartan\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-088",
+      "level": "L3",
+      "prompt": "Create a belongs_to edge from atorvastatin to statin.",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"atorvastatin\", \"to\": \"statin\", \"relation_type\": \"belongs_to\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-089",
+      "level": "L3",
+      "prompt": "Add a treats edge from metformin to diabetes.",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"metformin\", \"to\": \"diabetes\", \"relation_type\": \"treats\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-090",
+      "level": "L3",
+      "prompt": "add codeine causes dizziness edge",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"codeine\", \"to\": \"dizziness\", \"relation_type\": \"causes\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-091",
+      "level": "L3",
+      "prompt": "Record aspirin interacting with clopidogrel.",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"aspirin\", \"to\": \"clopidogrel\", \"relation_type\": \"interacts_with\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-092",
+      "level": "L3",
+      "prompt": "Create a treats edge from omeprazole to gerd.",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"omeprazole\", \"to\": \"gerd\", \"relation_type\": \"treats\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-093",
+      "level": "L3",
+      "prompt": "Add a contraindicated_for edge from lisinopril to pregnancy.",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"lisinopril\", \"to\": \"pregnancy\", \"relation_type\": \"contraindicated_for\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-094",
+      "level": "L3",
+      "prompt": "record gabapentin belongs_to anticonvulsant",
+      "reference_expr": "Create[\"Edge\", {\"from\": \"gabapentin\", \"to\": \"anticonvulsant\", \"relation_type\": \"belongs_to\"}]",
+      "expected_top_level_heads": [
+        "Create"
+      ]
+    },
+    {
+      "case_id": "OOD-095",
+      "level": "L2",
+      "prompt": "whats metformin's confidence again",
+      "reference_expr": "Get[\"metformin\", \"confidence\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-096",
+      "level": "L2",
+      "prompt": "Read omeprazole's category.",
+      "reference_expr": "Get[\"omeprazole\", \"category\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-097",
+      "level": "L2",
+      "prompt": "lisinopril name",
+      "reference_expr": "Get[\"lisinopril\", \"name\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-098",
+      "level": "L2",
+      "prompt": "Get the confidence field from warfarin.",
+      "reference_expr": "Get[\"warfarin\", \"confidence\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-099",
+      "level": "L2",
+      "prompt": "what category is breastfeeding",
+      "reference_expr": "Get[\"breastfeeding\", \"category\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-100",
+      "level": "L2",
+      "prompt": "Return the name on serotonin_syndrome.",
+      "reference_expr": "Get[\"serotonin_syndrome\", \"name\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-101",
+      "level": "L2",
+      "prompt": "gabapentin confidence?",
+      "reference_expr": "Get[\"gabapentin\", \"confidence\"]",
+      "expected_top_level_heads": [
+        "Get"
+      ]
+    },
+    {
+      "case_id": "OOD-102",
+      "level": "L2",
+      "prompt": "For each of atorvastatin and simvastatin, return the drug class.",
+      "reference_expr": "ForEach[List[\"atorvastatin\", \"simvastatin\"], d_, Traverse[d_, \"belongs_to\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-103",
+      "level": "L2",
+      "prompt": "For each of aspirin and warfarin, get confidence.",
+      "reference_expr": "ForEach[List[\"aspirin\", \"warfarin\"], d_, Get[d_, \"confidence\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-104",
+      "level": "L2",
+      "prompt": "For each of metformin, omeprazole, and losartan, return treated conditions.",
+      "reference_expr": "ForEach[List[\"metformin\", \"omeprazole\", \"losartan\"], d_, Traverse[d_, \"treats\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-105",
+      "level": "L2",
+      "prompt": "codeine gabapentin tramadol interactions each",
+      "reference_expr": "ForEach[List[\"codeine\", \"gabapentin\", \"tramadol\"], d_, Traverse[d_, \"interacts_with\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-106",
+      "level": "L2",
+      "prompt": "For each population pregnancy and children, get its name.",
+      "reference_expr": "ForEach[List[\"pregnancy\", \"children\"], p_, Get[p_, \"name\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-107",
+      "level": "L2",
+      "prompt": "For each adverse effect gi_bleed and nausea, return category.",
+      "reference_expr": "ForEach[List[\"gi_bleed\", \"nausea\"], e_, Get[e_, \"category\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-108",
+      "level": "L2",
+      "prompt": "loop over lisinopril and clopidogrel and show causes",
+      "reference_expr": "ForEach[List[\"lisinopril\", \"clopidogrel\"], d_, Traverse[d_, \"causes\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-109",
+      "level": "L2",
+      "prompt": "For every drug in amoxicillin and sertraline, show contraindicated populations.",
+      "reference_expr": "ForEach[List[\"amoxicillin\", \"sertraline\"], d_, Traverse[d_, \"contraindicated_for\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-110",
+      "level": "L2",
+      "prompt": "for each nsaid and ssri show name",
+      "reference_expr": "ForEach[List[\"nsaid\", \"ssri\"], cls_, Get[cls_, \"name\"]]",
+      "expected_top_level_heads": [
+        "ForEach"
+      ]
+    },
+    {
+      "case_id": "OOD-111",
+      "level": "L3",
+      "prompt": "Set lisinopril confidence to 0.8.",
+      "reference_expr": "Update[\"lisinopril\", {\"confidence\": 0.8}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-112",
+      "level": "L3",
+      "prompt": "metfomin name to Metformin XR",
+      "reference_expr": "Update[\"metformin\", {\"name\": \"Metformin XR\"}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-113",
+      "level": "L3",
+      "prompt": "Change omeprazole category to Drug.",
+      "reference_expr": "Update[\"omeprazole\", {\"category\": \"Drug\"}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-114",
+      "level": "L3",
+      "prompt": "Set gabapentin confidence to 0.65.",
+      "reference_expr": "Update[\"gabapentin\", {\"confidence\": 0.65}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-115",
+      "level": "L3",
+      "prompt": "Change the existing breastfeeding node's category to Population.",
+      "reference_expr": "Update[\"breastfeeding\", {\"category\": \"Population\"}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-116",
+      "level": "L3",
+      "prompt": "Update aspirin confidence to 0.95.",
+      "reference_expr": "Update[\"aspirin\", {\"confidence\": 0.95}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-117",
+      "level": "L3",
+      "prompt": "Set codeine name to Codeine Phosphate.",
+      "reference_expr": "Update[\"codeine\", {\"name\": \"Codeine Phosphate\"}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-118",
+      "level": "L3",
+      "prompt": "nausea confidence .7 pls",
+      "reference_expr": "Update[\"nausea\", {\"confidence\": 0.7}]",
+      "expected_top_level_heads": [
+        "Update"
+      ]
+    },
+    {
+      "case_id": "OOD-119",
+      "level": "L3",
+      "prompt": "Audit deleting old_test_node.",
+      "reference_expr": "Trace[Delete[\"old_test_node\"]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-120",
+      "level": "L3",
+      "prompt": "Trace setting atorvastatin confidence to 0.82.",
+      "reference_expr": "Trace[Update[\"atorvastatin\", {\"confidence\": 0.82}]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-121",
+      "level": "L3",
+      "prompt": "Trace creation of insomnia as a Condition.",
+      "reference_expr": "Trace[Create[\"Entity\", {\"id\": \"insomnia\", \"category\": \"Condition\", \"name\": \"Insomnia\"}]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-122",
+      "level": "L3",
+      "prompt": "audit adding metformin treats diabetes",
+      "reference_expr": "Trace[Create[\"Edge\", {\"from\": \"metformin\", \"to\": \"diabetes\", \"relation_type\": \"treats\"}]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-123",
+      "level": "L3",
+      "prompt": "log codeine temp node removal",
+      "reference_expr": "Trace[Delete[\"codeine_tmp\"]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-124",
+      "level": "L3",
+      "prompt": "Trace an update setting warfarin's name to Warfarin.",
+      "reference_expr": "Trace[Update[\"warfarin\", {\"name\": \"Warfarin\"}]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-125",
+      "level": "L3",
+      "prompt": "Trace a causes edge from gabapentin to dizziness.",
+      "reference_expr": "Trace[Create[\"Edge\", {\"from\": \"gabapentin\", \"to\": \"dizziness\", \"relation_type\": \"causes\"}]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-126",
+      "level": "L3",
+      "prompt": "trace aspirin confidence bump to .88",
+      "reference_expr": "Trace[Update[\"aspirin\", {\"confidence\": 0.88}]]",
+      "expected_top_level_heads": [
+        "Trace"
+      ]
+    },
+    {
+      "case_id": "OOD-127",
+      "level": "L3",
+      "prompt": "set lisinopril confidence to 0.8 then delete tmp1",
+      "reference_expr": "Do[Update[\"lisinopril\", {\"confidence\": 0.8}], Delete[\"tmp1\"]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-128",
+      "level": "L3",
+      "prompt": "Create losartan as a Drug, then add a treats edge from losartan to hypertension.",
+      "reference_expr": "Do[Create[\"Entity\", {\"id\": \"losartan\", \"category\": \"Drug\", \"name\": \"Losartan\"}], Create[\"Edge\", {\"from\": \"losartan\", \"to\": \"hypertension\", \"relation_type\": \"treats\"}]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-129",
+      "level": "L3",
+      "prompt": "Update metformin category to Drug and then name to Metformin.",
+      "reference_expr": "Do[Update[\"metformin\", {\"category\": \"Drug\"}], Update[\"metformin\", {\"name\": \"Metformin\"}]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-130",
+      "level": "L3",
+      "prompt": "delete stale_a then delete stale_b",
+      "reference_expr": "Do[Delete[\"stale_a\"], Delete[\"stale_b\"]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-131",
+      "level": "L3",
+      "prompt": "Add nausea as an adverse effect and link amoxicillin to it.",
+      "reference_expr": "Do[Create[\"Entity\", {\"id\": \"nausea\", \"category\": \"AdverseEffect\", \"name\": \"Nausea\"}], Create[\"Edge\", {\"from\": \"amoxicillin\", \"to\": \"nausea\", \"relation_type\": \"causes\"}]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-132",
+      "level": "L3",
+      "prompt": "Update aspirin confidence to 0.91, then trace deleting temp_aspirin.",
+      "reference_expr": "Do[Update[\"aspirin\", {\"confidence\": 0.91}], Trace[Delete[\"temp_aspirin\"]]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-133",
+      "level": "L3",
+      "prompt": "Create breastfeeding as a Population and contraindicate codeine for it.",
+      "reference_expr": "Do[Create[\"Entity\", {\"id\": \"breastfeeding\", \"category\": \"Population\", \"name\": \"Breastfeeding\"}], Create[\"Edge\", {\"from\": \"codeine\", \"to\": \"breastfeeding\", \"relation_type\": \"contraindicated_for\"}]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-134",
+      "level": "L3",
+      "prompt": "set gabapentin confidence .6 then get its name",
+      "reference_expr": "Do[Update[\"gabapentin\", {\"confidence\": 0.6}], Get[\"gabapentin\", \"name\"]]",
+      "expected_top_level_heads": [
+        "Do"
+      ]
+    },
+    {
+      "case_id": "OOD-135",
+      "level": "L3",
+      "prompt": "Delete old_test_node.",
+      "reference_expr": "Delete[\"old_test_node\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-136",
+      "level": "L3",
+      "prompt": "remove temp_edge_1 pls",
+      "reference_expr": "Delete[\"temp_edge_1\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-137",
+      "level": "L3",
+      "prompt": "Delete obsolete_drug.",
+      "reference_expr": "Delete[\"obsolete_drug\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-138",
+      "level": "L3",
+      "prompt": "Remove draft_condition.",
+      "reference_expr": "Delete[\"draft_condition\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-139",
+      "level": "L3",
+      "prompt": "Delete the duplicate GERD node.",
+      "reference_expr": "Delete[\"gerd_duplicate\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-140",
+      "level": "L3",
+      "prompt": "delete tmp clopidogrel",
+      "reference_expr": "Delete[\"clopidogrel_tmp\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-141",
+      "level": "L3",
+      "prompt": "purge stale_population",
+      "reference_expr": "Delete[\"stale_population\"]",
+      "expected_top_level_heads": [
+        "Delete"
+      ]
+    },
+    {
+      "case_id": "OOD-142",
+      "level": "L2",
+      "prompt": "codeine interactions if any else empty",
+      "reference_expr": "If[Equal[Traverse[\"codeine\", \"interacts_with\"], List[]], List[], Traverse[\"codeine\", \"interacts_with\"]]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-143",
+      "level": "L2",
+      "prompt": "If metformin treats nothing, return an empty list; otherwise return treatments.",
+      "reference_expr": "If[Equal[Traverse[\"metformin\", \"treats\"], List[]], List[], Traverse[\"metformin\", \"treats\"]]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-144",
+      "level": "L2",
+      "prompt": "If aspirin causes nothing return none, else return aspirin's effects.",
+      "reference_expr": "If[Equal[Traverse[\"aspirin\", \"causes\"], List[]], \"none\", Traverse[\"aspirin\", \"causes\"]]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-145",
+      "level": "L2",
+      "prompt": "when gabapentin has interactions show them otherwise []",
+      "reference_expr": "If[Equal[Traverse[\"gabapentin\", \"interacts_with\"], List[]], List[], Traverse[\"gabapentin\", \"interacts_with\"]]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-146",
+      "level": "L2",
+      "prompt": "If lisinopril confidence equals 0.8 return lisinopril else missing.",
+      "reference_expr": "If[Equal[Get[\"lisinopril\", \"confidence\"], 0.8], \"lisinopril\", \"missing\"]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-147",
+      "level": "L2",
+      "prompt": "clopidogrel contraindications if empty say none else list",
+      "reference_expr": "If[Equal[Traverse[\"clopidogrel\", \"contraindicated_for\"], List[]], \"none\", Traverse[\"clopidogrel\", \"contraindicated_for\"]]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-148",
+      "level": "L2",
+      "prompt": "If warfarin category is Drug, return interactions; otherwise none.",
+      "reference_expr": "If[Equal[Get[\"warfarin\", \"category\"], \"Drug\"], Traverse[\"warfarin\", \"interacts_with\"], \"none\"]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-149",
+      "level": "L2",
+      "prompt": "if omeprazole treats nothing give [] otherwise its treated conditions",
+      "reference_expr": "If[Equal[Traverse[\"omeprazole\", \"treats\"], List[]], List[], Traverse[\"omeprazole\", \"treats\"]]",
+      "expected_top_level_heads": [
+        "If"
+      ]
+    },
+    {
+      "case_id": "OOD-150",
+      "level": "L2",
+      "prompt": "give me gabapentin's interaction partners if found otherwise none",
+      "reference_expr": "IfFound[Traverse[\"gabapentin\", \"interacts_with\"], hits_, hits_, \"none\"]",
+      "expected_top_level_heads": [
+        "IfFound"
+      ]
+    },
+    {
+      "case_id": "OOD-151",
+      "level": "L2",
+      "prompt": "Return metformin treatments if found, otherwise none.",
+      "reference_expr": "IfFound[Traverse[\"metformin\", \"treats\"], hits_, hits_, \"none\"]",
+      "expected_top_level_heads": [
+        "IfFound"
+      ]
+    },
+    {
+      "case_id": "OOD-152",
+      "level": "L2",
+      "prompt": "aspirin adverse effects if found else empty list",
+      "reference_expr": "IfFound[Traverse[\"aspirin\", \"causes\"], effects_, effects_, List[]]",
+      "expected_top_level_heads": [
+        "IfFound"
+      ]
+    },
+    {
+      "case_id": "OOD-153",
+      "level": "L2",
+      "prompt": "Find lisinopril's name if found, else unknown.",
+      "reference_expr": "IfFound[Get[\"lisinopril\", \"name\"], name_, name_, \"unknown\"]",
+      "expected_top_level_heads": [
+        "IfFound"
+      ]
+    },
+    {
+      "case_id": "OOD-154",
+      "level": "L2",
+      "prompt": "clopidogrel contraindications if any otherwise none",
+      "reference_expr": "IfFound[Traverse[\"clopidogrel\", \"contraindicated_for\"], hits_, hits_, \"none\"]",
+      "expected_top_level_heads": [
+        "IfFound"
+      ]
+    },
+    {
+      "case_id": "OOD-155",
+      "level": "L2",
+      "prompt": "aspirin ingredients if found else []",
+      "reference_expr": "IfFound[Traverse[\"aspirin\", \"contains\"], ingredients_, ingredients_, List[]]",
+      "expected_top_level_heads": [
+        "IfFound"
+      ]
+    },
+    {
+      "case_id": "OOD-156",
+      "level": "L2",
+      "prompt": "losartan treats if found otherwise none",
+      "reference_expr": "IfFound[Traverse[\"losartan\", \"treats\"], hits_, hits_, \"none\"]",
+      "expected_top_level_heads": [
+        "IfFound"
+      ]
+    }
+  ]
+}

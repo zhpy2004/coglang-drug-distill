@@ -1,0 +1,7 @@
+active_domain: drug
+port: 8080
+llama_server_port: 8081
+threads: 4
+models_dir: "~/coglang"          # where the .gguf files live (override per machine)
+grammar_path: "~/coglang/coglang.gbnf"
+llama_server_bin: "llama-server"  # on PATH in Termux; absolute path on desktop

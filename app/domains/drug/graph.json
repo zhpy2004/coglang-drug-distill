@@ -1,0 +1,269 @@
+{
+  "schema": {
+    "categories": [
+      "Drug",
+      "DrugClass",
+      "Ingredient",
+      "Condition",
+      "AdverseEffect",
+      "Population"
+    ],
+    "relation_types": [
+      "contains",
+      "belongs_to",
+      "interacts_with",
+      "contraindicated_for",
+      "causes",
+      "treats"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "warfarin",
+      "category": "Drug",
+      "name": "Warfarin",
+      "confidence": 1.0
+    },
+    {
+      "id": "aspirin",
+      "category": "Drug",
+      "name": "Aspirin",
+      "confidence": 1.0
+    },
+    {
+      "id": "ibuprofen",
+      "category": "Drug",
+      "name": "Ibuprofen",
+      "confidence": 1.0
+    },
+    {
+      "id": "naproxen",
+      "category": "Drug",
+      "name": "Naproxen",
+      "confidence": 1.0
+    },
+    {
+      "id": "fluoxetine",
+      "category": "Drug",
+      "name": "Fluoxetine",
+      "confidence": 1.0
+    },
+    {
+      "id": "sertraline",
+      "category": "Drug",
+      "name": "Sertraline",
+      "confidence": 1.0
+    },
+    {
+      "id": "tramadol",
+      "category": "Drug",
+      "name": "Tramadol",
+      "confidence": 1.0
+    },
+    {
+      "id": "acetaminophen",
+      "category": "Drug",
+      "name": "Acetaminophen",
+      "confidence": 1.0
+    },
+    {
+      "id": "acetylsalicylic_acid",
+      "category": "Ingredient",
+      "name": "Acetylsalicylic acid",
+      "confidence": 1.0
+    },
+    {
+      "id": "nsaid",
+      "category": "DrugClass",
+      "name": "NSAID",
+      "confidence": 1.0
+    },
+    {
+      "id": "ssri",
+      "category": "DrugClass",
+      "name": "SSRI",
+      "confidence": 1.0
+    },
+    {
+      "id": "hypertension",
+      "category": "Condition",
+      "name": "Hypertension",
+      "confidence": 1.0
+    },
+    {
+      "id": "depression",
+      "category": "Condition",
+      "name": "Major depressive disorder",
+      "confidence": 1.0
+    },
+    {
+      "id": "headache",
+      "category": "Condition",
+      "name": "Headache",
+      "confidence": 1.0
+    },
+    {
+      "id": "gi_bleed",
+      "category": "AdverseEffect",
+      "name": "Gastrointestinal bleeding",
+      "confidence": 1.0
+    },
+    {
+      "id": "serotonin_syndrome",
+      "category": "AdverseEffect",
+      "name": "Serotonin syndrome",
+      "confidence": 1.0
+    },
+    {
+      "id": "pregnancy",
+      "category": "Population",
+      "name": "Pregnancy",
+      "confidence": 1.0
+    },
+    {
+      "id": "children",
+      "category": "Population",
+      "name": "Children under 12",
+      "confidence": 1.0
+    }
+  ],
+  "edges": [
+    {
+      "from": "warfarin",
+      "to": "aspirin",
+      "relation_type": "interacts_with",
+      "confidence": 1.0,
+      "severity": "major"
+    },
+    {
+      "from": "warfarin",
+      "to": "ibuprofen",
+      "relation_type": "interacts_with",
+      "confidence": 1.0,
+      "severity": "major"
+    },
+    {
+      "from": "warfarin",
+      "to": "naproxen",
+      "relation_type": "interacts_with",
+      "confidence": 1.0,
+      "severity": "major"
+    },
+    {
+      "from": "aspirin",
+      "to": "acetylsalicylic_acid",
+      "relation_type": "contains",
+      "confidence": 1.0
+    },
+    {
+      "from": "aspirin",
+      "to": "nsaid",
+      "relation_type": "belongs_to",
+      "confidence": 1.0
+    },
+    {
+      "from": "aspirin",
+      "to": "gi_bleed",
+      "relation_type": "causes",
+      "confidence": 1.0
+    },
+    {
+      "from": "aspirin",
+      "to": "children",
+      "relation_type": "contraindicated_for",
+      "confidence": 1.0
+    },
+    {
+      "from": "ibuprofen",
+      "to": "nsaid",
+      "relation_type": "belongs_to",
+      "confidence": 1.0
+    },
+    {
+      "from": "ibuprofen",
+      "to": "gi_bleed",
+      "relation_type": "causes",
+      "confidence": 1.0
+    },
+    {
+      "from": "ibuprofen",
+      "to": "pregnancy",
+      "relation_type": "contraindicated_for",
+      "confidence": 1.0
+    },
+    {
+      "from": "ibuprofen",
+      "to": "headache",
+      "relation_type": "treats",
+      "confidence": 1.0
+    },
+    {
+      "from": "naproxen",
+      "to": "nsaid",
+      "relation_type": "belongs_to",
+      "confidence": 1.0
+    },
+    {
+      "from": "naproxen",
+      "to": "gi_bleed",
+      "relation_type": "causes",
+      "confidence": 1.0
+    },
+    {
+      "from": "naproxen",
+      "to": "pregnancy",
+      "relation_type": "contraindicated_for",
+      "confidence": 1.0
+    },
+    {
+      "from": "fluoxetine",
+      "to": "ssri",
+      "relation_type": "belongs_to",
+      "confidence": 1.0
+    },
+    {
+      "from": "fluoxetine",
+      "to": "tramadol",
+      "relation_type": "interacts_with",
+      "confidence": 1.0,
+      "severity": "major"
+    },
+    {
+      "from": "fluoxetine",
+      "to": "serotonin_syndrome",
+      "relation_type": "causes",
+      "confidence": 1.0
+    },
+    {
+      "from": "fluoxetine",
+      "to": "depression",
+      "relation_type": "treats",
+      "confidence": 1.0
+    },
+    {
+      "from": "sertraline",
+      "to": "ssri",
+      "relation_type": "belongs_to",
+      "confidence": 1.0
+    },
+    {
+      "from": "sertraline",
+      "to": "tramadol",
+      "relation_type": "interacts_with",
+      "confidence": 1.0,
+      "severity": "moderate"
+    },
+    {
+      "from": "sertraline",
+      "to": "depression",
+      "relation_type": "treats",
+      "confidence": 1.0
+    },
+    {
+      "from": "acetaminophen",
+      "to": "headache",
+      "relation_type": "treats",
+      "confidence": 1.0
+    }
+  ]
+}

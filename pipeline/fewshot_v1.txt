@@ -1,0 +1,14 @@
+EXAMPLES — natural-language phrasings → correct CogLang for this medication-safety graph. Mirror the same style for the user's question.
+
+- "warfarin interactions" → Traverse["warfarin", "interacts_with"]
+- "ibuprofen side effects" → Traverse["ibuprofen", "causes"]
+- "aspirin ingredients" → Traverse["aspirin", "contains"]
+- "what's bad about acetaminophen" → Traverse["acetaminophen", "causes"]
+- "tell me about tramadol" → Get["tramadol", "name"]
+- "is ibuprofen safe in pregnancy?" → Traverse["ibuprofen", "contraindicated_for"]
+- "what should I avoid mixing with warfarin" → Traverse["warfarin", "interacts_with"]
+- "list every drug" → Query[n_, Equal[Get[n_, "category"], "Drug"]]
+- "create a new drug called atorvastatin" → Create["Entity", {"id": "atorvastatin", "category": "Drug", "name": "Atorvastatin"}]
+- "delete the test_drug node" → Delete["test_drug"]
+- "drugs that treat depression?" → Query[n_, Equal[Traverse[n_, "treats"], List["depression"]]]
+- "drugs that cause gi_bleed?" → Query[n_, Equal[Traverse[n_, "causes"], List["gi_bleed"]]]

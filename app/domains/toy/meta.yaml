@@ -1,0 +1,5 @@
+name: toy
+description: Tiny toy graph to prove domain-pack swapping
+model: drug-v6-q4_k_m.gguf
+max_tokens: 128
+temperature: 0.0

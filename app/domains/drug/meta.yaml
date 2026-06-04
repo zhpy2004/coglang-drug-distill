@@ -1,0 +1,5 @@
+name: drug
+description: Medication-safety knowledge graph (drug-drug interactions, contraindications)
+model: drug-v6-q4_k_m.gguf
+max_tokens: 256
+temperature: 0.0
